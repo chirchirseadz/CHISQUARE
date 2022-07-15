@@ -1,9 +1,13 @@
+from re import template
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PostJobForm, JobProposalForm, FindTalentRequestForm
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
 
 
 
@@ -15,24 +19,23 @@ def jobrequest(request):
         request_form = FindTalentRequestForm(request.POST)
         if request_form.is_valid():
             request_form.save(commit= False)
-            job_title = request_form.cleaned_data.get('job_title')
-            your_info = request_form.cleaned_data.get('your_info')
+            first_name = request_form.cleaned_data.get('first_name')
             email = request_form.cleaned_data.get('email')
-            
 
-            send_mail(
-                 job_title, #subject
-                 your_info, # message
-                 email, # from email
-           
-                #  'cherokaren@gmailcom'
-                 ['sydneychirchir@gmail.com', 'admin@chi-squareconnections.com'], # to email
-          
+            template = render_to_string('emails/email_request.html', {'name': first_name})
+            email_message = EmailMessage(
+                'This is a message from The Admin', # here we have the subject
+                template, # here is the boy message ):
+                settings.EMAIL_HOST_USER, # This is the sender
+                [email] # This is the recepient 
             )
-        
-            request_form.save()
+            email_message.fail_silently = False
+            email_message.send()
 
-            return redirect('landing_page')
+            request_form.save()
+            return HttpResponse('<script> window.alert("Your submission was Successfull ")</script>')
+            
+            
     else:
         request_form = FindTalentRequestForm()
     context = {
