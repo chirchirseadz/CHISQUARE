@@ -1,6 +1,6 @@
 from re import template
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PostJobForm, JobProposalForm, FindTalentRequestForm
 from django.contrib import messages
@@ -18,23 +18,22 @@ def jobrequest(request):
     if request.method == 'POST':
         request_form = FindTalentRequestForm(request.POST)
         if request_form.is_valid():
-            request_form.save(commit= False)
+            request_form.save()
             first_name = request_form.cleaned_data.get('first_name')
             email = request_form.cleaned_data.get('email')
-
             template = render_to_string('emails/email_request.html', {'name': first_name})
             email_message = EmailMessage(
-                'This is a message from The Admin', # here we have the subject
+            'Message from the Admin', # here we have the subject
                 template, # here is the boy message ):
                 settings.EMAIL_HOST_USER, # This is the sender
-                [email] # This is the recepient 
+                [email,] # This is the recepient 
             )
             email_message.fail_silently = False
             email_message.send()
-
             request_form.save()
-            return HttpResponse('<script> window.alert("Your submission was Successfull ")</script>')
-            
+            return redirect('landing_page')
+
+                  
             
     else:
         request_form = FindTalentRequestForm()
