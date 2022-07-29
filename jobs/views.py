@@ -35,13 +35,13 @@ def jobrequest(request):
             email_message.fail_silently = False
             email_message.send()
 
-            # Rhis is the email sent to notify the admin for the request made from the site
+            # This is the email sent to notify the admin for the request made from the site
 
             email_message = EmailMessage(
             'Job Request Notification', # here we have the subject
                 job_request_email_template, # here is the boy message ):
-                settings.EMAIL_HOST_USER, # This is the sender
-                [email,] # This is the recepient 
+                email, # This is the sender
+                [settings.EMAIL_HOST_USER,] # This is the recepient 
             )
             email_message.fail_silently = False
             email_message.send()
