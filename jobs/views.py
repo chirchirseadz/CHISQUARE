@@ -21,10 +21,25 @@ def jobrequest(request):
             request_form.save()
             first_name = request_form.cleaned_data.get('first_name')
             email = request_form.cleaned_data.get('email')
-            template = render_to_string('emails/email_request.html', {'name': first_name})
+            send_user_email_template = render_to_string('emails/email_request.html', {'name': first_name})
+            job_request_email_template = render_to_string('emails/email_request.html', {'name': first_name})
+
+            # This email is sent to the user
+
             email_message = EmailMessage(
             'Message from the Admin', # here we have the subject
-                template, # here is the boy message ):
+                send_user_email_template, # here is the boy message ):
+                settings.EMAIL_HOST_USER, # This is the sender
+                [email,] # This is the recepient 
+            )
+            email_message.fail_silently = False
+            email_message.send()
+
+            # Rhis is the email sent to notify the admin for the request made from the site
+
+            email_message = EmailMessage(
+            'Job Request Notification', # here we have the subject
+                job_request_email_template, # here is the boy message ):
                 settings.EMAIL_HOST_USER, # This is the sender
                 [email,] # This is the recepient 
             )
@@ -83,7 +98,7 @@ def proposal(request):
             proposal.save(commit=False)
             terms_and_conditions = proposal.cleaned_data['terms_and_conditions']
             if terms_and_conditions == False:
-                return redirect('proposal_terms_errors')
+                return redirect('post_job')
             else: 
                 proposal.save()
                 return redirect('homepage')

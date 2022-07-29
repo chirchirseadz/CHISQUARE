@@ -1,3 +1,4 @@
+from ast import If
 from distutils.log import FATAL
 from django.shortcuts import render, redirect
 from . forms import SignUpForm, UserUpdateForm, EmployeeProfileUpdateForm, EmployerProfileUpdateForm
@@ -25,29 +26,45 @@ def register(request):
 
 @login_required(login_url='login')
 def profile(request):
-    
     return render(request, 'users/profile.html')
 
 @login_required(login_url='login')
-def employee_update_profile(request):
+def profile_update(request):
     if request.method == 'POST':
         user_update_form = UserUpdateForm(request.POST, instance=request.user)
         employee_profile_update_form = EmployeeProfileUpdateForm(request.POST, request.FILES, instance = request.user.user_profile)
-        employer_profile_update_form = EmployerProfileUpdateForm(request.POST, request.FILES, instance = request.user.user_profile)
+        
         if user_update_form.is_valid() and employee_profile_update_form.is_valid():
             user_update_form.save()
             employee_profile_update_form.save()
+            
             messages.success(request, 'Successfully updated Profile')
             return redirect('user_profile')
     else:
         user_update_form = UserUpdateForm(instance=request.user)
         employee_profile_update_form = EmployeeProfileUpdateForm(instance=request.user.user_profile)
-        employer_profile_update_form = EmployerProfileUpdateForm(instance = request.user.user_profile)
+        
        
     context = {
         'user_update_form': user_update_form,
         'employee_profile_update_form': employee_profile_update_form,
-        'employer_profile_update_form': employer_profile_update_form
+        
     }
     return render(request, 'users/profile_update.html', context)
 
+def employer_profile_update(request):
+    if request.method == 'POST':
+        user_update_form = UserUpdateForm(request.POST, instance=request.user)
+        employer_profile_update_form = EmployerProfileUpdateForm(request.POST, request.FILES, instance = request.user.user_profile)
+        if employer_profile_update_form.is_valid() and user_update_form.is_valid():
+            employer_profile_update_form.save()
+            # user_update_form.save()
+            return redirect('user_profile')
+    else:
+        employer_profile_update_form = EmployerProfileUpdateForm(instance = request.user.user_profile)
+        # user_update_form = UserUpdateForm(instance=request.user)
+    context = {
+        'employer_profile_update_form':employer_profile_update_form,
+        # 'user_update_form': user_update_form
+    }
+    return render(request, 'users/employer_profile_update.html', context)

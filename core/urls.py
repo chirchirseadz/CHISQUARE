@@ -38,7 +38,8 @@ urlpatterns = [
     # profile section
 
     path('profile/', user_views.profile, name='user_profile'),
-    path('update_profile/', user_views.employee_update_profile, name='update_profile'),
+    path('employer_profile_update/',user_views.employer_profile_update, name='employer_profile_update'),
+    path('update_profile/', user_views.profile_update, name='update_profile'),
 
 
 

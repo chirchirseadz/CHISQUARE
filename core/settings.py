@@ -20,10 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+# SECRET_KEY = os.getenv('SECRET_KEY')
+
+SECRET_KEY ='kdjaksdj0232nkwe3o43o43-3434294_(-343434953o535'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = True
+
 
 
 ALLOWED_HOSTS = []
@@ -42,7 +46,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'dashboard.apps.DashboardConfig',
     'jobs.apps.JobsConfig',
-    'crispy_forms',
+    'crispy_forms'
+    
 ]
 
 MIDDLEWARE = [
@@ -79,12 +84,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.mysql',
+   #     'NAME': 'chisquaredb',
+    #    'USER':'root',
+     #   'PASSWORD': '',
+      #  'HOST': 'localhost',
+       # 'PORT': '3306',
+    #}
+#}
 
 
 # Password validation
@@ -139,15 +156,31 @@ MEDIA_ROOT = (BASE_DIR /'media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'homepage'
-
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Email settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.chi-squareconnections.com'
-# mail-vs1-f45.google.com 
-EMAIL_PORT = '587'
+EMAIL_HOST = 'mail.chi-squareconnections.com' 
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = 'info@chi-squareconnections.com'
+EMAIL_HOST_PASSWORD = 'Nairobi@2030'
+
+
+
+
+
+
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# # EMAIL_HOST = 'mail.chi-squareconnections.com'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'seadzcompany@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Anita141#'
+
+# # EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+# # EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 

@@ -31,7 +31,7 @@ class UserUpdateForm(forms.ModelForm):
 class EmployeeProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = user_profile
-        fields = ['national_id','area_of_specialization','brief_info','address','phone','current_location','image','profile_updated']
+        fields = ['national_id','area_of_specialization','job_title','brief_info','address','phone','current_location','image','profile_updated']
         labels = {
             'area_of_specialization': 'Select Area of Specialization',
             'brief_info': 'Talk About Yourself',
@@ -41,7 +41,7 @@ class EmployeeProfileUpdateForm(forms.ModelForm):
 class EmployerProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = user_profile
-        fields = ['national_id','area_of_specialization','brief_info','address','phone','current_location','company_name','company_email','image','profile_updated']
+        fields = ['national_id','area_of_specialization','job_title','brief_info','address','phone','current_location','company_name','company_email','image','profile_updated']
 
         labels = {
             'area_of_specialization': 'Select Area of Specialization',

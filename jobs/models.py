@@ -75,7 +75,7 @@ class FindTalentRequest(models.Model):
     )
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
-    email = models.EmailField(null=True)
+    email = models.EmailField(null=True, unique=True)
     area_of_specialization = models.CharField(max_length=100, choices= PROFFESION, null=True)
     job_title = models.CharField(max_length=100, null =True)
     your_info = models.TextField(blank=True)

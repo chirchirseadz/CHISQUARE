@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from users.models import user_profile
 from jobs.forms import FindTalentRequestForm
+from jobs.models import JobPost
+from django.contrib.auth.models import User
+from jobs.models import FindTalentRequest
 
 
 # Create your views here.
@@ -9,7 +12,12 @@ from jobs.forms import FindTalentRequestForm
     
 
 def landing_page(request):
-    return render(request, 'dashboard/landing_page.html', )
+    data = FindTalentRequest.objects.all()
+    context = {
+        'data':data
+    }
+    
+    return render(request, 'dashboard/landing_page.html', context)
 
 
 
@@ -28,14 +36,17 @@ def blog(request):
 
 def contact(request):
     return render(request, 'dashboard/contact.html')
+
+
+    
 ################### talent works ###########
 
 def admin_assistant(request):
-    admin_assistant = user_profile.objects.filter('Administrative Assistant')
+    users = User.objects.all()
     context = {
-        admin_assistant
+        'users' : users
     }
-    return render(request, 'dashboard/admin_assistant.html')
+    return render(request, 'dashboard/admin_assistant.html',context)
 
 def clerk_data_entry(request):
     return render(request, 'dashboard/clerk_data_entry.html')

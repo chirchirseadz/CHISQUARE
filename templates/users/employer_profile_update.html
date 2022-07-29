@@ -17,7 +17,7 @@
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ user_form | crispy}}
-                    {{ user_update_form | crispy}}
+                    {{ employer_profile_update_form | crispy}}
                     
                     <input type="submit" class="btn btn-info" name="submit" value="Update Profile"><br>
                 </form>

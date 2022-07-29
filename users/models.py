@@ -10,7 +10,7 @@ class user_profile(models.Model):
         ('Hospitality','Hospitality'),
         ('Customer Care','Customer Care'),
         ('Hospitality And Wait Staff','Hospitality And Wait Staff'),
-        ('Nanny Services','Nanny Services'),
+       
     )
     EXPERIENCE = (
          ('0-3 Years','0-3 Years'),
@@ -21,12 +21,13 @@ class user_profile(models.Model):
     COUNTY = (
        ('Nairobi','Nairobi'),
        ('kisumu','kisumu'),
-       ('Uasingishu','Uasin-gishu'),
+       ('Uasin-gishu','Uasin-gishu'),
        ('kwale','kwale'),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    national_id = models.PositiveIntegerField(null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, verbose_name="user")
+    national_id = models.PositiveIntegerField(null=True, unique=True, verbose_name='National Id')
     area_of_specialization = models.CharField(max_length=100, choices= PROFFESION, null=True)
+    job_title = models.CharField(max_length=100, null=True)
     brief_info = models.TextField(blank=True, verbose_name='Brief Description', null=True)
     address = models.CharField(max_length=255, verbose_name='Location Address', null=True)
     phone  = models.CharField(max_length=20, verbose_name='Mobile Phone Number', null=True)

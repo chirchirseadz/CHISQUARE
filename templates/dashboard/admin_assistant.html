@@ -5,6 +5,7 @@
 
 {% block content %}
 {% include 'partials/navbar.html' %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,7 @@
   <!-- ======= Header ======= -->
   
   <main id="main">
+   
 
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -31,6 +33,16 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
+    
+
+    <!-- {% for user in users %}
+    {% if user.user_profile.area_of_specialization == 'Administrative Assistant'%}
+      {{ user.user_profile.area_of_specialization }}
+      {{user.username}}
+      {{user.user_profile.brief_info}}
+      {{user.user_profile.current_location}}
+    {% endif %}
+    {% endfor%} -->
 
     <!-- ======= Our Team Section ======= -->
     <section id="team" class="team section-bg">
@@ -42,11 +54,12 @@
         </div>
 
         <div class="row">
-
+        {% for user in users %}
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up">
               <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="{{ user.user_profile.image.url }}" class="img-fluid" alt="">
+                <!-- {% static 'assets/img/team/team-1.jpg' %} -->
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -60,60 +73,9 @@
               </div>
             </div>
           </div>
+{% endfor %}
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="200">
-              <div class="member-img">
-                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="member-img">
-                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-              </div>
-            </div>
-          </div>
+          
 
         </div>
 
