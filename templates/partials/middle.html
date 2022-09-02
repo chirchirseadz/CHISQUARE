@@ -1,4 +1,4 @@
-
+{% load static %}
 <!-- ======= Hero Section ======= -->
 <style>
    
@@ -13,29 +13,66 @@
     #box-container{
          margin-left:4%;
     }
+
+    
+   
     @media only screen and  (max-width: 600px) {
         #box-container{
         margin-left:0%;
-    }
+        }
+
+    /* .middle{
+        width: 100%;
+    } */
+
     
     }
 
+    #home1img{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 37%;
+
+    }
+    
+    @media only screen and  (max-width: 900px) {
+        #home1img{
+            margin-top: 5%;
+            margin-bottom: 5%;
+            margin-left: 3%;
+
+    }
+    
+
+    }
+
+  
 </style>
-  <section class="middle " style=" height: 40; background-color: #e1f1e7; ">
+<div class="section" data-aos="fade-up">
+    <div class="row" id="home1image">
+        <div class="col-md-6" id="home1img">
+            <img class="img-thumbnail " src="{% static 'assets/img/home1.png' %}" alt="profile-image">
+        </div>
+    </div>
+</div>
+  <section class="middle " style=" height: 40; background-color: #d9dcdb; " data-aos="fade-right">
    <div class="row">
        <div  class="col-md-1 "></div>
-       <div class="col-md-1 "></div>  
-       <div class="col-md-1"></div>
+       <div class="col-md-2 ">
+        
+        <img src="assets/img/.jpg" class="testimonial-img" alt="">
+       </div>  
+       
     
        <div class="col-md-2 " id="box-container"> 
         <center style="margin-bottom: 5%;">
-            <a id="buttons" class="btn btn-outline-success p-4 " href="{% url 'request_form' %}">Find Talent</a>
+            <a id="buttons" class="btn btn-outline-success p-4 " href="{% url 'hire_request_form' %}">Hire Talent</a>
         </center>
        </div>
        <div class="col-md-1 bg-"></div>
        <div class="col-md-2 ">
         <center>
-            <a id="buttons" class="btn btn-outline-success p-4 " href="{% url 'homepage' %}">Hire Talent</a>
+            <a id="buttons" class="btn btn-outline-success p-4 " href="{% url 'job_request_form' %}">Find Job</a>
         </center>
        </div>
        

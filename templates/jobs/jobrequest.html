@@ -13,15 +13,24 @@
     #top{
         padding:2%;
     }
+    @media only screen and  (max-width: 600px) {
+        #container{
+        margin-top: 20%;
+    }
+    }
 </style>
 
-<div id="container" class="row">
+<div id="container" class="row" data-aos="fade-up">
     
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <div class="alert alert-success">
-            <p> Hello {{ first_name }}, your Request was submitted successfully  <span style="text-align: right;"><a href="{% url 'landing_page'  %}"> x </a></span></p> 
-          </div>
+        {% for message in messages %}
+        {% if message.tags %}
+        <div id="alert" class=" col-md-12 alert alert-success sent-message ">
+         <h6>{{message}}</h6>
+        </div>
+        {% endif %}
+        {% endfor %}
         <div class="card">
             <div id="top" class=" bg-success text-white">
              Make Your Job Proposal Here

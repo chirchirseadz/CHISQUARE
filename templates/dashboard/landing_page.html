@@ -1,11 +1,76 @@
 {% extends 'partials/base.html' %}
-{% block title %} homepage {% endblock %}
+{% block title %} Home-Chi-square {% endblock %}
 {% block content %} 
 {% load static %}
 {% include 'partials/navbar.html' %}
+{% for message in messages %}
+  {% if message.tags %}
+  <div id="alert" class=" col-md-12 alert alert-success sent-message ">
+    <h6>{{message}}</h6>
+  </div>
+  {% endif %}
+  {% endfor %}
 {% include 'partials/corousel.html' %}
 {% include 'partials/middle.html' %}
 
+<style>
+  @media only screen and  (max-width: 600px) {
+     #services{ 
+    display: none;
+    opacity: 0;
+    transform: translateY(-1000px);
+  }
+  #row{
+    display: none;
+    transform: translateY(-1000px);
+    
+  }
+  #section{
+    padding: 0;
+    padding-bottom: -100000px;
+  }
+  #talents{
+          height: 0px;
+        }
+        ul ,li {
+          list-style: none;
+          
+        }
+    .header{
+      margin-bottom: 30%;
+    }
+}
+#home1img{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 37%;
+        
+
+    }
+    #img{
+     width: 50%; 
+     margin-left: -11%;
+     height: 50vh;
+    }
+    
+    @media only screen and  (max-width: 900px) {
+        #home1img{
+            margin-top: 5%;
+            margin-bottom: 5%;
+            margin-left: 3%;
+
+    }
+    #img{
+      display: block;
+     width: 100%; 
+     margin-left: 0;
+     height: 50vh;
+    }
+    
+
+    }
+
+</style>
   <main class="main" id="main">
     
     <!-- ======= About Us Section ======= -->
@@ -42,55 +107,84 @@
         </div>
 
       </div>
-    </section><!-- End About Us Section -->
+    </section>
+    <!-- End About Us Section -->
 
-   
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg p-3 ">
-      <center class=" p-4" style="margin-bottom: 1%;"><h1 class="bi bi-person text-success "></h1><h1 class="text-success">Available Requested Talents</h1></center>
-     <!-- ======= Our Clients Section ======= -->
 
+    <section id="section" class="services section-bg" data-aos="fade-up">
+      <div class="section">
+        <div class="row" id="home1image">
+            <div class="col-md-12" id="home1img">
+                <img id="img" class="img-thumbnail" src="{% static 'assets/img/image1.png' %}" alt="profile-image">
+            </div>
+        </div>
+    </div>
+      <center style="margin-left:4%; margin-bottom: 5%;" class="header" ><h1 class="bi bi-award-fill text-success "></h1><h4 class="text-success ">Available Requested Talents</h4></center>
+    <div class="row ">
+    
+     <!-- ======= Our Clients Section ======= -->
+    
+     
+     <div id="services" class="col-md-3 d-flex"><center class=" p-4" style="margin-bottom: 1%; margin-left: 30%;"><h3 class="bi bi-people text-success "></h3><h3 class="text-success">Talent Name</h3></center>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <center id="services"  class=" p-4" style=" margin-left: 10%;"><h3 class="bi bi-person-workspace text-success "></h3><h3 class="text-success">Area of specialization</h1></center>
+     </div>
+     <div class="col-md-4 d-flex">
+      <center id="services"  class=" p-4" style=" margin-left: 25%;"><h3 class="bi bi-geo-alt-fill text-success "></h3><h3 class="text-success">Talent Location </h3></center>
+     </div>
+     
+    </div>
+    <div class="col-md-1"></div>
     <section id="clients" class="clients">
+      
     
       <style>
         #talents{
           height: 20vh;
+          margin-top: -100px;
         }
         ul ,li {
           list-style: none;
           
         }
       </style>
-    <div class="row" id="talents">
-      <div class="col-md-3"></div>
-      <div class="col-md-8">
-
-        
-          <div class="row">
-            <div  class="col-md-6 ">
+    <div class="row" id="talents" data-aos="fade-up">
+      <div class="col-md-1"></div>
+            <div class="col-md-4">            
+                <marquee  direction = "up" scrolldelay:300>
+                  {% for data in data %}
+                  <ul >
+                    <li class="text-success" style="font-size: x-large;">{{data.first_name }}<span> {{data.last_name}}</span></li>
+                  </ul>
+                  {% endfor %}
+                </marquee>
+            </div>
+            <div class="col-md-4">            
               <marquee  direction = "up" scrolldelay:300>
                 {% for data in data %}
                 <ul >
-                  <li class="text-success" style="color: black; font-size: x-large;">{{data.first_name }}<span> {{data.last_name}}</span></li>
+                  <li class="text-success" style="font-size: x-large; margin-left: -2%;">{{data.area_of_specialization }}</li>
                 </ul>
                 {% endfor %}
               </marquee>
             </div>
-            <div class="col-md-6">
-              <center>
-                <marquee  direction = "up" scrolldelay:300>
-                  {% for data in data %}
-                  <ul>
-                    <li class="text-success" style="color: black; font-size: x-large;">{{data.area_of_specialization }}</li>
-                  </ul>
-                  {% endfor %}
-                  
-                </marquee>
-              </center>
+            <div class="col-md-3">            
+              <marquee  direction = "up" scrolldelay:300>
+                {% for data in data %}
+                <ul >
+                  <li class="text-success" style="font-size: x-large;">{{data.location}}</li>
+                </ul>
+                {% endfor %}
+              </marquee>
             </div>
+            
+            
           </div>
-      
-      <div class="col-md-1"></div>
+    
+    
       
     </div>
     </section>

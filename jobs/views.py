@@ -2,18 +2,15 @@ from re import template
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .forms import PostJobForm, JobProposalForm, FindTalentRequestForm
-from django.contrib import messages
+from .forms import PostJobForm, JobProposalForm, FindTalentRequestForm, HireTalentRequestForm
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
-
-
-
+from django.contrib import messages
 
 # Create your views here.
 # page request 
-
+# Request job logics
 def jobrequest(request):
     if request.method == 'POST':
         request_form = FindTalentRequestForm(request.POST)
@@ -21,14 +18,15 @@ def jobrequest(request):
             request_form.save()
             first_name = request_form.cleaned_data.get('first_name')
             email = request_form.cleaned_data.get('email')
-            send_user_email_template = render_to_string('emails/email_request.html', {'name': first_name})
-            job_request_email_template = render_to_string('emails/email_request.html', {'name': first_name})
+            
+            send_user_email_template = render_to_string('emails/email_job_request_notification.html', {'name': first_name})
+            job_request_email_template = render_to_string('emails/email_job_request.html', {'name': first_name})
 
             # This email is sent to the user
 
             email_message = EmailMessage(
-            'Message from the Admin', # here we have the subject
-                send_user_email_template, # here is the boy message ):
+            'Message from Admin chi-squareconnections regarding your Job Request', # here we have the subject
+                send_user_email_template, # here is the body message ):
                 settings.EMAIL_HOST_USER, # This is the sender
                 [email,] # This is the recepient 
             )
@@ -38,7 +36,7 @@ def jobrequest(request):
             # This is the email sent to notify the admin for the request made from the site
 
             email_message = EmailMessage(
-            'Job Request Notification', # here we have the subject
+            'New Jobseeker Alert !! ', # here we have the subject
                 job_request_email_template, # here is the boy message ):
                 email, # This is the sender
                 [settings.EMAIL_HOST_USER,] # This is the recepient 
@@ -46,6 +44,7 @@ def jobrequest(request):
             email_message.fail_silently = False
             email_message.send()
             request_form.save()
+            messages.success(request, "Your Request has been successfully sent !! ")
             return redirect('landing_page')
 
                   
@@ -56,6 +55,56 @@ def jobrequest(request):
         'request_form': request_form
     }
     return render(request, 'jobs/jobrequest.html', context)
+
+# hire talent logics
+
+def hirerequest(request):
+    if request.method == 'POST':
+        hire_request_form = HireTalentRequestForm(request.POST)
+        if  hire_request_form.is_valid():
+            hire_request_form.save()
+            first_name =  hire_request_form.cleaned_data.get('first_name')
+            email =  hire_request_form.cleaned_data.get('email')
+
+            job_hire_email_template = render_to_string('emails/email_hire_request.html', {'name': first_name})
+            hire_admin_send_user_email_template = render_to_string('emails/email_hire_notification.html', {'name': first_name})
+
+            # This email is sent to the user
+
+            email_message = EmailMessage(
+            'Message from Admin chi-squareconnections regarding your Job Request', # here we have the subject
+                hire_admin_send_user_email_template, # here is the boy message ):
+                settings.EMAIL_HOST_USER, # This is the sender
+                [email,] # This is the recepient 
+            )
+            email_message.fail_silently = False
+            email_message.send()
+
+            # This is the email sent to notify the admin for the request made from the site
+
+            email_message = EmailMessage(
+            'Job Hire Request Alert !! ', # here we have the subject
+                job_hire_email_template, # here is the boy message ):
+                email, # This is the sender
+                [settings.EMAIL_HOST_USER,] # This is the recepient 
+            )
+            email_message.fail_silently = False
+            email_message.send()
+            hire_request_form.save()
+            messages.success(request, "Your Request has been successfully sent !! ")
+            return redirect('landing_page')
+
+                  
+            
+    else:
+        hire_request_form = HireTalentRequestForm()
+    context = {
+        'hire_request_form':  hire_request_form
+    }
+    return render(request, 'jobs/hiretalent.html', context)
+
+
+
 
 
 

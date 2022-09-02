@@ -9,11 +9,23 @@
 <div style="margin-top:7%;" class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        {% if user.user_profile.profile_updated == False %}
-        <div class="col-12 alert alert-danger">
-            Your Profile is Incomplete, Your job Post will not Appear  to the Talents 
-        </div>
-        {% endif %}
+
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+            <div class="alert alert-danger">
+                {{message}}
+            </div>
+            {% endif %}
+            {% if message.tags == "success" %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+        
         <div class="card">
             <div class="card-header bg-success text-white">
                 Employer Profile Detail Page
@@ -23,7 +35,7 @@
                     <table class="table table-borderless">
                         <thead>
                             <span class="h4">Profile Information</span class="h4">
-                            <a class="btn btn-success btn-sm float-right" href="{% url 'update_profile' %}">Edit</a>
+                            <a class="btn btn-success btn-sm float-right" href="{% url 'employer_profile_update' %}">Edit</a>
                             <hr>
                         </thead>
                         <tbody>
@@ -85,6 +97,7 @@
         </div>
     </div>
 </div>
+
 {% else %}
 
 
@@ -93,12 +106,23 @@
     <div class="col-md-2"></div>
 
     <div class="col-md-8">
-        {% if user.user_profile.profile_updated == False %}
-<div class="col-12 alert alert-danger">
-    Your Profile is Incomplete, Your Requests will not Appear  to the Employers 
-</div>
-{% endif %}
-        <div class="card">
+
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+            <div class="alert alert-danger">
+                {{message}}
+            </div>
+            {% endif %}
+            {% if message.tags == "success" %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+    <div class="card">
             <div class="card-header bg-success text-white">
                 User Profile Detail Page
             </div>

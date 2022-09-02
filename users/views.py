@@ -28,6 +28,7 @@ def register(request):
 def profile(request):
     return render(request, 'users/profile.html')
 
+
 @login_required(login_url='login')
 def profile_update(request):
     if request.method == 'POST':
@@ -37,9 +38,12 @@ def profile_update(request):
         if user_update_form.is_valid() and employee_profile_update_form.is_valid():
             user_update_form.save()
             employee_profile_update_form.save()
-            
-            messages.success(request, 'Successfully updated Profile')
-            return redirect('user_profile')
+            profile_updated = employee_profile_update_form.cleaned_data.get("profile_update")
+            if profile_updated == False:
+                 messages.error(request, 'Kindly check the update profile checkbox')
+            else:
+                messages.success(request, 'Profile Updated Successfully !!')
+                return redirect('user_profile')
     else:
         user_update_form = UserUpdateForm(instance=request.user)
         employee_profile_update_form = EmployeeProfileUpdateForm(instance=request.user.user_profile)
@@ -57,14 +61,25 @@ def employer_profile_update(request):
         user_update_form = UserUpdateForm(request.POST, instance=request.user)
         employer_profile_update_form = EmployerProfileUpdateForm(request.POST, request.FILES, instance = request.user.user_profile)
         if employer_profile_update_form.is_valid() and user_update_form.is_valid():
+            user_update_form.save()
             employer_profile_update_form.save()
-            # user_update_form.save()
+            profile_updated = employer_profile_update_form.cleaned_data.get("profile_updated")
+
+            if profile_updated == True:
+                messages.success(request, 'Profile Updated Successfully !!')
+                return redirect('user_profile')
+            else:
+                messages.error(request, 'Kindly check the update completed checkbox since your Request will not be attended to !! ')
+                return redirect('employer_profile_update')
+                
             return redirect('user_profile')
     else:
         employer_profile_update_form = EmployerProfileUpdateForm(instance = request.user.user_profile)
-        # user_update_form = UserUpdateForm(instance=request.user)
+        user_update_form = UserUpdateForm(instance=request.user)
     context = {
         'employer_profile_update_form':employer_profile_update_form,
-        # 'user_update_form': user_update_form
+        'user_update_form': user_update_form
     }
-    return render(request, 'users/employer_profile_update.html', context)
+    return render(request, 'users/profile_update.html', context)
+
+    
