@@ -13,6 +13,9 @@ import os
 import environ
 from pathlib import Path
 
+import django_heroku
+import dj_database_url 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,7 +34,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # '127.0.0.1:8000', 'https//:www.chi-squareconnections.com'
 
@@ -139,8 +142,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATIC_ROOT = (BASE_DIR/"asert/")
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
 
+# STATIC_ROOT = (BASE_DIR/"asert/")
+STATIC_ROOT = os.path.join(BASE_DIR, "assert")
+
+django_heroku.settings(locals())
 
 MEDIA_ROOT = (BASE_DIR /'media')
 
