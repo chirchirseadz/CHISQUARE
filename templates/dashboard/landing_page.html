@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-      <center style="margin-left:4%; margin-bottom: 5%;" class="header" ><h1 class="bi bi-award-fill text-success "></h1><h4 class="text-success ">Available Requested Talents</h4></center>
+      <center id="talent-header" style="margin-left:4%; margin-bottom: 5%;" class="header" ><h1 class="bi bi-award-fill text-success "></h1><h4 class="text-success ">Available  Talents</h4></center>
     <div class="row ">
     
      <!-- ======= Our Clients Section ======= -->
@@ -150,6 +150,22 @@
           list-style: none;
           
         }
+        @media only screen and  (max-width: 600px) {
+        #talents{
+        opacity: 0;
+        
+    }
+    #talent-header{
+      opacity: 0;
+     
+    }
+    #footer{
+      margin-top: -50%; 
+      position: absolute;
+      width: 100%;
+    }
+    }
+
       </style>
     <div class="row" id="talents" data-aos="fade-up">
       <div class="col-md-1"></div>
@@ -195,6 +211,8 @@
 
   
 </body>
+<div class="div" id="footer">
+  {% include 'partials/footer.html' %}
+</div>
 
-{% include 'partials/footer.html' %}
 {% endblock %} 

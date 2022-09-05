@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv('SECRET_KEY')
  
-SECRET_KEY =os.getenv('SECRET_KEY', default='mysecret')
+SECRET_KEY = 'django-insecure-j)84@n39f&%d@x6rcvr6%6ldwe-^r#8u8%)m@3ncm=#ckys#xp'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -146,7 +146,6 @@ STATICFILES_DIRS = [
 # STATIC_ROOT = (BASE_DIR/"asert/")
 STATIC_ROOT = os.path.join(BASE_DIR, "assert")
 
-django_heroku.settings(locals())
 
 MEDIA_ROOT = (BASE_DIR /'media')
 

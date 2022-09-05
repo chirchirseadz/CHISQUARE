@@ -41,3 +41,39 @@
 }
     
 }
+
+
+
+/* ################################################################ */
+#talents{
+    height: 20vh;
+    margin-top: -100px;
+  }
+  ul ,li {
+    list-style: none;
+    
+  }
+  @media only screen and  (max-width: 600px) {
+  #talents{
+  opacity: 0;
+  
+}
+#talent-header{
+opacity: 0;
+
+}
+#footer{
+margin-top: -50%; 
+position: absolute;
+width: 100%;
+}
+}
+
+
+@media only screen and  (max-width: 600px) {
+    #home1img{
+        height: 100000vh;
+    }
+}
+
+
