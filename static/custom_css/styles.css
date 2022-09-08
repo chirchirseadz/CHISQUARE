@@ -53,7 +53,7 @@
     list-style: none;
     
   }
-  @media only screen and  (max-width: 600px) {
+@media only screen and  (max-width: 900px) {
   #talents{
   opacity: 0;
   
@@ -62,18 +62,15 @@
 opacity: 0;
 
 }
-#footer{
-margin-top: -50%; 
-position: absolute;
-width: 100%;
-}
+
 }
 
 
 @media only screen and  (max-width: 600px) {
     #home1img{
-        height: 100000vh;
+        height: 0vh;
     }
+    
 }
 
 

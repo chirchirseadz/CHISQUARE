@@ -3,22 +3,37 @@
 {% block content %} 
 {% load static %}
 {% include 'partials/navbar.html' %}
-{% for message in messages %}
-  {% if message.tags %}
-  <div id="alert" class=" col-md-12 alert alert-success sent-message ">
-    <h6>{{message}}</h6>
-  </div>
-  {% endif %}
-  {% endfor %}
-{% include 'partials/corousel.html' %}
+
+<div class="row mt-3">
+  {% include 'partials/corousel.html' %}
+</div>
 {% include 'partials/middle.html' %}
+<div id="img" class=" col-md-12  p-3  mt-3" data-aos="fade-up">
+  <img id="item-img" class="img-thumbnail " src="{% static 'assets/img/home1.png' %}" alt="profile-image">
+</div>
 
 <style>
+  #item-img{
+    margin-left: 90%;
+  }
   @media only screen and  (max-width: 600px) {
-     #services{ 
+    #img {
+      width: 100%;
+      margin-left: 50%;
+      
+    }
+    #item-img{
+      width: 100%;
+      margin-left: 0%;
+      
+    }
+    #main{
+      transform: translateY(-17%);
+    }
+    #services{ 
     display: none;
     opacity: 0;
-    transform: translateY(-1000px);
+    transform: translateY();
   }
   #row{
     display: none;
@@ -27,7 +42,7 @@
   }
   #section{
     padding: 0;
-    padding-bottom: -100000px;
+    
   }
   #talents{
           height: 0px;
@@ -49,8 +64,9 @@
     }
     #img{
      width: 50%; 
+     margin: 0 auto;
      margin-left: -11%;
-     height: 50vh;
+    
     }
     
     @media only screen and  (max-width: 900px) {
@@ -74,7 +90,7 @@
   <main class="main" id="main">
     
     <!-- ======= About Us Section ======= -->
-    <section id="about-us" class="about-us">
+    <section id="about-us" class="about-us" data-aos="fade-up" >
       <div class="container" data-aos="fade-up">
 
         <div class="row content">
@@ -114,11 +130,11 @@
 
     <section id="section" class="services section-bg" data-aos="fade-up">
       <div class="section">
-        <div class="row" id="home1image">
+        <!-- <div class="row" id="home1image">
             <div class="col-md-12" id="home1img">
                 <img id="img" class="img-thumbnail" src="{% static 'assets/img/image1.png' %}" alt="profile-image">
             </div>
-        </div>
+        </div> -->
     </div>
       <center id="talent-header" style="margin-left:4%; margin-bottom: 5%;" class="header" ><h1 class="bi bi-award-fill text-success "></h1><h4 class="text-success ">Available  Talents</h4></center>
     <div class="row ">
@@ -163,6 +179,7 @@
       margin-top: -50%; 
       position: absolute;
       width: 100%;
+      transform: translateY(-40%);
     }
     }
 
@@ -199,9 +216,7 @@
             
             
           </div>
-    
-    
-      
+
     </div>
     </section>
 
@@ -209,10 +224,8 @@
   
   <!-- End #main -->
 
-  
 </body>
-<div class="div" id="footer">
-  {% include 'partials/footer.html' %}
-</div>
+
+{% include 'partials/footer.html' %}
 
 {% endblock %} 
