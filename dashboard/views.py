@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from users.models import user_profile
-from jobs.forms import FindTalentRequestForm
+from jobs.forms import TalentRequestForm
 from jobs.models import JobPost
 from django.contrib.auth.models import User
-from jobs.models import FindTalentRequest
+from jobs.models import TalentRequest
 from users.models import AreaOfSpecialization
 
 from .forms import MessageForm
@@ -20,7 +20,7 @@ from django.core.mail import BadHeaderError, send_mail
 
 def landing_page(request):
     categories = AreaOfSpecialization.objects.all()
-    data = FindTalentRequest.objects.all()
+    data = TalentRequest.objects.all()
     context = {
         'data':data,
         'categories': categories

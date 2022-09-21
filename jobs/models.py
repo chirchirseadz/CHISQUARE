@@ -16,7 +16,7 @@ class JobPost(models.Model):
 
 
     def __str__(self):
-        return f'{self.area_of_specialization}'
+        return f'{self.title}'
     
 class jobrequest(models.Model):
     TERMS_OF_SERVICE = (
@@ -39,7 +39,7 @@ class jobrequest(models.Model):
     def __str__(self):
             return f'{self.title}'
 
-class FindTalentRequest(models.Model):
+class TalentRequest(models.Model):
   
     LOCATION = (
          ('Nairobi City','Nairobi City'),
@@ -106,6 +106,7 @@ class FindTalentRequest(models.Model):
     phone_number = models.CharField(max_length=100, null=True)
     terms_of_service =  models.CharField(max_length=100, choices=SERVICE, null=True)
     date_of_request = models.DateTimeField(auto_now=True)
+    terms_and_conditions = models.BooleanField(default=False)
 
     def __str__(self):
         return self.job_title
@@ -170,18 +171,21 @@ class HireTalentRequest(models.Model):
         ('Temporary','Temporary'),
         ('Parmanent','Parmanent'),
     )
+   
     first_name = models.CharField(max_length=100, null=True)
     last_name = models.CharField(max_length=100, null=True)
     email = models.EmailField(null=True, unique=True)
     area_of_need = models.ForeignKey(AreaOfSpecialization, on_delete=models.CASCADE,null=True)
+    job_title = models.CharField(max_length=100, null =True)
     your_specifications = models.TextField(blank=True)
     phone_number = models.CharField(max_length=100, null=True)
     location = models.CharField(max_length=100, choices=LOCATION, null=True)
     terms_of_service =  models.CharField(max_length=100, choices=SERVICE, null=True)
     date_of_request = models.DateTimeField(auto_now=True)
+    terms_and_conditions = models.BooleanField(default=False, null=False)
 
     def __str__(self):
-        return self.area_of_need
+        return self.job_title
 
 
 
