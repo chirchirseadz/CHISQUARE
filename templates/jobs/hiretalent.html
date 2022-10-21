@@ -53,6 +53,7 @@
                 <div class="col-md-12">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
+<<<<<<< HEAD
                         {{hire_request_form.first_name|as_crispy_field}}
                         {{hire_request_form.last_name|as_crispy_field}}
                         {{hire_request_form.email|as_crispy_field}}
@@ -231,6 +232,10 @@
                         
                         </p> 
                         <input type="submit" class="btn btn-success " name="submit" value="Submit your Hire Request "><br>
+=======
+                        {{hire_request_form|crispy}}
+                        <input type="submit" class="btn btn-success" name="submit" value="Submit Hire Request "><br>
+>>>>>>> parent of 0dafcc3 (little changes)
                     </form>
                 </div>
             </div>

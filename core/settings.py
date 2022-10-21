@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-import environ
+
 
 
 
@@ -31,7 +31,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv('SECRET_KEY')
  
+# <<<<<<< HEAD
 SECRET_KEY = config('SECRET_KEY') 
+# =======
+SECRET_KEY =os.getenv('SECRET_KEY', default='mysecret')
+# >>>>>>> parent of 0dafcc3 (little changes)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -151,6 +155,7 @@ STATICFILES_DIRS = [
 
 # STATIC_ROOT = (BASE_DIR/"asert/")
 STATIC_ROOT = os.path.join(BASE_DIR, "assert")
+
 
 
 MEDIA_ROOT = (BASE_DIR /'media')
