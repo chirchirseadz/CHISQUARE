@@ -48,29 +48,56 @@
   <link rel="stylesheet" href="{% static 'custom_css/styles.css' %}">
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Company - v4.7.0
-  * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'asets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'asets/css/style.css' %}" rel="stylesheet">
+
+   <!-- Vendor JS Files -->
+   <script src="{% static 'asets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'asets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+   <script src="{% static 'asets/vendor/php-email-form/validate.js' %}"></script>
+ 
+   <!-- Template Main JS File -->
+   <script src="{% static 'asets/js/main.js' %}"></script>
+
+
+
+   <!-- Admin css  -->
+
+  <!-- Vendor CSS Files -->
+  <!-- <link href="{% static 'assets1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> -->
+  <!-- <link href="{% static 'assets1/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet"> -->
+  <link href="{% static 'assets1/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+
+  <!-- Template Main CSS File -->
+  
+
+ 
 </head>
 
 <body>
-  <!-- {% if messages %}
-  {% for msg in messages %}
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <div class="alert alert-{{msg.tags}}">{{msg}}</div>
+    <!-- Spinner Start -->
+  <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+      <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
       </div>
-      <div class="col-md-4"></div>
-    </div>
-
-  {% endfor %}
-  {% endif %} -->
-{% block content %} 
+  </div> -->
+  <!-- Spinner End -->
+  
+{% block content %}
 
 
 {% endblock %}
@@ -85,6 +112,23 @@
   <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
   <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+  <!-- admin js -->
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets1/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets1/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets1/js/main.js' %}"></script>
+
 
 </html>
 

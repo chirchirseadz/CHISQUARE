@@ -31,7 +31,9 @@ urlpatterns = [
     path('jobs/', include('jobs.urls')),
 
     # users authentications 
-    path('register/', user_views.register, name='signup'),
+    path('krn/skr/admin/reg/', user_views.admin_signup, name='admin_signup'),
+    path('employer/signup/', user_views.employer_signup, name='employer_signup'),
+    path('employee/signup/', user_views.employee_signup, name='employee_signup'),
     path('login/', auth_views.LoginView.as_view(template_name = ('users/login.html')), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = ('users/logout.html')), name='logout'),
 

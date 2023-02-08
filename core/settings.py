@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-
+import environ
 
 
 
 from pathlib import Path
+
 
 
 # Initialise environment variables
@@ -31,19 +32,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv('SECRET_KEY')
  
-# <<<<<<< HEAD
-SECRET_KEY = config('SECRET_KEY') 
-# =======
-SECRET_KEY =os.getenv('SECRET_KEY', default='mysecret')
-# >>>>>>> parent of 0dafcc3 (little changes)
+SECRET_KEY=config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = True
 
 
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS=["*"]
+# ALLOWED_HOSTS=["chi-squareconnections.com"]
 
 # '127.0.0.1:8000', 'https//:www.chi-squareconnections.com'
 
@@ -59,7 +58,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'dashboard.apps.DashboardConfig',
     'jobs.apps.JobsConfig',
-    'crispy_forms'
+    'crispy_forms',
     
 ]
 
@@ -86,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'jobs.views.area_of_specialization'
             ],
         },
     },
@@ -97,6 +97,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 DATABASES = {
     'default': {
@@ -157,28 +158,21 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "assert")
 
 
-
 MEDIA_ROOT = (BASE_DIR /'media')
 
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_URL = 'user-dashboard'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Email settings
 
-EMAIL_BACKEND = config('EMAIL_BACKEND')
+
+EMAIL_BACKEND=config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT=config('EMAIL_PORT')
+EMAIL_USE_TLS=config('EMAIL_USE_TLS')
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
 
 
-
-# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'your mail server you want '
-# EMAIL_PORT=587
-# EMAIL_USE_TLS=True
-# EMAIL_HOST_USER='email address in mail server e.g info@kenyaservices.com '
-# EMAIL_HOST_PASSWORD = ' your pass '

@@ -16,7 +16,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2>Contact</h2>
         <ol>
-          <li><a href="{% url 'homepage' %}">Home</a></li>
+          <li><a href="{% url 'landing_page' %}">Home</a></li>
           <li>Contact</li>
         </ol>
       </div>
@@ -77,38 +77,37 @@
           display: inline-flex;
           justify-content: space-between;
         }
-        #contact{
-          margin-bottom: 20%;
-        }
+        /* #contact{
+          margin-bottom: 5%;
+        } */
       </style>
       <div id="contact" class="row mt-5 justify-content-center" data-aos="fade-up">
 
-          <div class="col-md-6 offset-4 p-2 mb-5">
+          <div class="col-md-6 offset-4 p-2 ">
             <b><h3 class="text-primary">CONTACT US :</h3></b>
             
           </div>
-          <hr style="border: 1px solid ; margin-bottom: 5%;">
+          <hr style="border: 1px solid ; margin-bottom: 5Z;">
           <form  method="post" role="form"  class="col-md-10">
            
            {% csrf_token %}
            {{ message_form |crispy}}
             <div class="text-center">
-              <input value="send message" type="submit" class="btn btn-primary btn-block ">
+              <input value="send message" type="submit" class="btn btn-success  btn-block ">
               
           </form>
         
 
       </div>
 
-    </div>
+   
   </section><!-- End Contact Section -->
-
+  
 </main><!-- End #main -->
 
 <!-- footer -->
+</div>
+{% include 'partials/footer.html' %}
 
-
-
-  {% include 'partials/footer.html' %}
 
 {% endblock %}

@@ -1,28 +1,74 @@
 from ast import If
 from distutils.log import FATAL
 from django.shortcuts import render, redirect
-from . forms import SignUpForm, UserUpdateForm, EmployeeProfileUpdateForm, EmployerProfileUpdateForm
+from .forms import EmployeeProfileUpdateForm, EmployerProfileUpdateForm
+from .forms import UserSignUpForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db import transaction
 
 
 # Create your views here. 
 
-def register(request):
+
+
+# Admin Registration Process
+
+@transaction.atomic
+def admin_signup(request):
     if request.method == 'POST':
-        user_form = SignUpForm(request.POST)
-        
+        user_form = UserSignUpForm(request.POST)
         if user_form.is_valid():
-            user_form.save()
-            return redirect('homepage')
+            user = user_form.save(commit=False)
+            user.is_admin = True
+            user.save()
+            return redirect('user-dashboard')
     else:
-        user_form = SignUpForm()
+        user_form = UserSignUpForm()
+        
+    context = {
+        'form': user_form,
+    }
+    return render(request, 'users/admin_signup.html', context)
+
+
+# Employer Registration Process
+@transaction.atomic
+def employer_signup(request):
+    if request.method == 'POST':
+        user_form = UserSignUpForm(request.POST)
+        if user_form.is_valid():
+            user = user_form.save(commit=False)
+            user.is_employer = True
+            user.save()
+           
+            return redirect('user-dashboard')
+    else:
+        user_form = UserSignUpForm()
         
     context = {
         'user_form': user_form,
-        
     }
-    return render(request, 'users/signup.html', context)
+    return render(request, 'users/employer_signup.html', context)
+
+#  Employee registration process
+def employee_signup(request):
+    if request.method == 'POST':
+        user_form = UserSignUpForm(request.POST)
+        if user_form.is_valid():
+            user = user_form.save(commit=False)
+            user.is_applicant = True
+            user.save()
+            return redirect('user-dashboard')
+    else:
+        user_form = UserSignUpForm()
+        
+    context = {
+        'user_form': user_form,
+    }
+    return render(request, 'users/employee_signup.html', context)
+
+
 
 @login_required(login_url='login')
 def profile(request):
@@ -72,7 +118,7 @@ def employer_profile_update(request):
                 messages.error(request, 'Kindly check the update completed checkbox since your Request will not be attended to !! ')
                 return redirect('employer_profile_update')
                 
-            return redirect('user_profile')
+            # return redirect('user_profile')
     else:
         employer_profile_update_form = EmployerProfileUpdateForm(instance = request.user.user_profile)
         user_update_form = UserUpdateForm(instance=request.user)
@@ -81,5 +127,9 @@ def employer_profile_update(request):
         'user_update_form': user_update_form
     }
     return render(request, 'users/profile_update.html', context)
+
+
+
+
 
     
